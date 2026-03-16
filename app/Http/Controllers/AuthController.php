@@ -28,7 +28,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user->load('scans')
+            'user' => $user->load('scans'),
         ]);
     }
 
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['Kode kredensial salah.'],
             ]);
@@ -52,7 +52,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user->load('scans')
+            'user' => $user->load('scans'),
         ]);
     }
 
